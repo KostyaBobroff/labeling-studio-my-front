@@ -1,135 +1,2532 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="/favicon.ico"/><link rel="preconnect" href="https://fonts.gstatic.com"><link href="//fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"><link href="//fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="stylesheet" href="/styles/main.css"><script>// window.APP_SETTINGS = {
-      //   feature_flags: {},
-      //   feature_flags_default_value: true,
-      // }</script><title>LSF</title><script defer="defer" src="static/js/main.js"></script><link href="static/css/main.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="header"><a id="logo" href="/"><img src="/images/ls_logo.svg" alt="label studio logo"></a><ul id="nav"><li><a href="https://labelstud.io/guide">Docs</a></li><li><a class="github-button" href="https://github.com/heartexlabs/label-studio" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star heartexlabs/label-studio on GitHub"><img src="./images/GitHub-Mark-64px.png" height="25"/></a></li></ul></div><div id="ls-container"><div id="label-studio"></div></div><footer class="footer"><span>Made with <img src="/images/3nowhite.svg" height="16"/> by <a target="_blank" href="https://heartex.net">Heartex</a> in San Francisco</span></footer><script>(function (d, o) {
-          d.domReady = function (n, a) {
-              o.addEventListener && o.addEventListener("DOMContentLoaded", function e(t) {
-                  o.removeEventListener("DOMContentLoaded", e), n.call(a || d, t)
-              }) || o.attachEvent && o.attachEvent("onreadystatechange", function e(t) {
-                  "complete" === o.readyState && (o.detachEvent("onreadystatechange", e), n.call(a || d, t))
-              })
-          }
-      })(window, document);</script><style>body {
-        height: 100vh;
+  //   feature_flags: {},
+  //   feature_flags_default_value: true,
+  // }</script><title>LSF</title><script defer="defer" src="static/js/main.js"></script><link href="static/css/main.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="header"><a id="logo" href="/"><img src="/images/ls_logo.svg" alt="label studio logo"></a><ul id="nav"><li><a href="https://labelstud.io/guide">Docs</a></li><li><a class="github-button" href="https://github.com/heartexlabs/label-studio" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star heartexlabs/label-studio on GitHub"><img src="./images/GitHub-Mark-64px.png" height="25"/></a></li></ul></div><div id="ls-container"><div id="label-studio"></div></div><footer class="footer"><span>Made with <img src="/images/3nowhite.svg" height="16"/> by <a target="_blank" href="https://heartex.net">Heartex</a> in San Francisco</span></footer><script>(function (d, o) {
+      d.domReady = function (n, a) {
+          o.addEventListener && o.addEventListener("DOMContentLoaded", function e(t) {
+              o.removeEventListener("DOMContentLoaded", e), n.call(a || d, t)
+          }) || o.attachEvent && o.attachEvent("onreadystatechange", function e(t) {
+              "complete" === o.readyState && (o.detachEvent("onreadystatechange", e), n.call(a || d, t))
+          })
       }
+  })(window, document);</script><style>body {
+    height: 100vh;
+  }
 
-      #label-studio {
-        height: calc(100vh - 88px);
-      }</style><script>domReady(function () {
-        if (window.DISABLE_DEFAULT_LSF_INIT) {
-          console.log("Default initialization prevented")
-          return false;
+  #label-studio {
+    height: calc(100vh - 88px);
+  }</style><script>domReady(function () {
+    if (window.DISABLE_DEFAULT_LSF_INIT) {
+      console.log("Default initialization prevented")
+      return false;
+    }
+
+    const annotationHistory = [
+      //{"id":14,"created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","action_type": "accepted","result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
+      //{"id":15,"created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","action_type": "updated","result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
+      //{"id":16,"created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","action_type": "rejected","result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
+      {"id":16,"comment": "I think according to new design we should record not only update of result in annotation but review rejection/acceptance too, because in current way we can't show action range in the history, only result updating.\n\nIn current functionality we create history record if we pass a result field. It doesn't let make a comment on review. Because we decided to relate comments to history.", "created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","action_type": "fixed_and_accepted","result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
+      //{"id":17,"created_by":1,"action_type": "draft-created","created_at":"2021-05-26T13:03:43.335198Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":34,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}]},
+      //{"id":18,"created_by":1,"action_type": "updated","created_at":"2021-05-26T13:03:43.335198Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":34,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}]},
+      //{"id":19,"created_by":1,"action_type": "submitted", "created_at":"2021-05-26T13:03:49.330745Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":35,"previous_annotation_history":34,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"},{"id":"ALbgPwBdmj","type":"labels","value":{"end":2215,"text":"ale8) December 31, 2017Tr","start":2190,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
+      {"id":19,"created_by":1,"action_type": "submitted", "created_at":"2021-05-26T13:03:49.330745Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":35,"previous_annotation_history":34,"result":[{ "original_width": 2242, "original_height": 2802, "image_rotation": 0, "value": { "x": 22.038567493112954, "y": 44.27312775330397, "width": 30.57851239669421, "height": 24.008810572687224, "rotation": 0 }, "id": "EPcQbFzM5K", "from_name": "bbox", "to_name": "image", "type": "rectangle", "origin": "manual" }, { "original_width": 2242, "original_height": 2802, "image_rotation": 0, "value": { "x": 22.038567493112954, "y": 44.27312775330397, "width": 30.57851239669421, "height": 24.008810572687224, "rotation": 0, "labels": ["Handwriting"]}, "id": "EPcQbFzM5K", "from_name": "label", "to_name": "image", "type": "labels", "origin": "manual"},{"original_width": 2242, "original_height": 2802, "image_rotation": 0, "value": { "x": 22.038567493112954, "y": 44.27312775330397, "width": 30.57851239669421, "height": 24.008810572687224, "rotation": 0, "text": ["hello world"]}, "id": "EPcQbFzM5K", "from_name": "transcription", "to_name": "image", "type": "textarea", "origin": "manual"}]},
+    ]
+
+  const addFeatureFlags = () => {
+    window.APP_SETTINGS = {
+        ...(window.APP_SETTINGS ?? {}),
+        feature_flags: {
+            ...(window.APP_SETTINGS?.feature_flags ?? {}),
+            ...(window.FEATURE_FLAGS ?? {}),
+            feat_front_lsdv_4583_multi_image_segmentation_short: true,
+            fflag_fix_all_lsdv_4711_cors_errors_accessing_task_data_short: true,
+            fflag_feat_front_dev_4081_magic_wand_tool: true,
+            fflag_feat_front_lsdv_4583_6_images_preloading_short: true
+        },
+    };
+  }
+
+  addFeatureFlags();
+
+    const data = {
+  "images": [
+    "https://media.istockphoto.com/id/153684296/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D0%B5-%D1%88%D0%B8%D1%84%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B5-https.webp?s=2048x2048&w=is&k=20&c=IklS3glh0cBs8GV8Y4zPckz4N1H1snluy1dlwk8FH2s=",
+    "https://cdn.pixabay.com/photo/2025/09/10/11/25/duck-9826181_1280.jpg"
+  ],
+  "image_url": "https://labelstudio.cs.navio.auto/tasks/22407/resolve/?fileuri=czM6Ly9sYWJlbC1zdHVkaW8vTmF2aW9RQS9iYXRjaDUvc3RhY2tlZC84ZGJiYjdiMGJjOTMucG5n",
+  "frame_rate": 1,
+  "assessor_id": "a",
+  "sequence_id": "8dbbb7b0bc93",
+  "full_video_url": "https://labelstudio.cs.navio.auto/tasks/22407/resolve/?fileuri=czM6Ly9sYWJlbC1zdHVkaW8vTmF2aW9RQS9iYXRjaDUvZnVsbF92aWRlby84ZGJiYjdiMGJjOTMubXA0",
+  "keyframe_video_url": "https://labelstudio.cs.navio.auto/static/samples/opossum_snow.mp4",
+  "predictions": {
+    "result": [
+      {
+        "id": "13cdeaac-b",
+        "type": "rectangle",
+        "value": {
+          "x": 66,
+          "y": 25.5,
+          "width": 2.000000000000005,
+          "height": 2.000000000000002,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 1,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "labels",
+        "value": {
+          "x": 66,
+          "y": 25.5,
+          "width": 2.000000000000005,
+          "height": 2.000000000000002,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 1
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 1
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Красный светофор"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 1
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 1
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Светофор для направления движения эго-автомобиля виден под пешеходным мостом вдалеке. Он красный и остается красным на протяжении всей последовательности."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 1
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 1
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Вероятно, останется красным на какое-то время, требуя от эго-автомобиля остановиться, или может стать зеленым по мере приближения эго-автомобиля."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 1
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 1
+      },
+      {
+        "id": "13cdeaac-b",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Высокий приоритет: эго-автомобиль должен быть готов остановиться по этому сигналу."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 1
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "rectangle",
+        "value": {
+          "x": 2.1,
+          "y": 1.3,
+          "width": 58.699999999999996,
+          "height": 8.9,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 0,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "labels",
+        "value": {
+          "x": 2.1,
+          "y": 1.3,
+          "width": 58.699999999999996,
+          "height": 8.9,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Надголовные дорожные знаки"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Надголовный дорожный знак (слева)"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f2",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Надголовный дорожный знак (справа)"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f3",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Большие желто-белые надголовные дорожные знаки установлены на портале, охватывающем дорогу, предоставляя навигационную информацию. Они неподвижны относительно дороги."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Большой желтый надголовный знак с текстом и стрелкой, указывающей влево, расположенный над крайними левыми полосами. Он остается неподвижным на протяжении всей последовательности."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f5",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Большой желтый надголовный знак с текстом, включающим \"МКАД\", расположенный над правыми полосами. Изначально четкой стрелки направления не видно, но небольшая желтая стрелка, указывающая вправо, становится отчетливо видна под текстом \"МКАД\" начиная с кадра 3. Он остается неподвижным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f6",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Останется неподвижным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Останется неподвижным, продолжая предоставлять информацию о направлении для левого пути."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f8",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Останется неподвижным, продолжая предоставлять информацию о направлении для возможного поворота направо."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f9",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Низкая релевантность: Предоставляет информацию, но не влияет напрямую на немедленные действия вождения после понимания."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Низкая релевантность: предоставляет общую информацию о направлении для пути, по которому эго-автомобиль не движется напрямую, так как эго остается на центральных/правых полосах."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f11",
+        "item_index": 0
+      },
+      {
+        "id": "38da44c4-0",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Низкая релевантность: предоставляет информацию о возможном повороте направо, который эго-автомобиль может совершить или не совершить в зависимости от пункта назначения."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f12",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "rectangle",
+        "value": {
+          "x": 0,
+          "y": 11.5,
+          "width": 100,
+          "height": 13.5,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 0,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "labels",
+        "value": {
+          "x": 0,
+          "y": 11.5,
+          "width": 100,
+          "height": 13.5,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Пешеходный мост"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Пешеходный надземный мост"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f2",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Надземный пешеходный мост"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f3",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Большой пешеходный мост с металлическими фермами и стеклянными панелями охватывает ширину проезжей части впереди эго-автомобиля. Это стационарная надземная конструкция."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Большой, серый металлический и стеклянный пешеходный надземный мост охватывает всю ширину дороги впереди, соединяя сооружения с обеих сторон. Он остается статичной частью инфраструктуры."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f5",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Большой, крытый пешеходный мост пересекает всю дорогу над путем эго-автомобиля, соединяя сооружения с обеих сторон. Это статический элемент инфраструктуры и остается неподвижным на протяжении всей последовательности."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f6",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Останется неподвижным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Останется неподвижным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f8",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Останется неподвижным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f9",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Низкая релевантность: Постоянный ориентир, который не влияет напрямую на путь эго-автомобиля."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Низкая релевантность: постоянная статическая структура, не представляет прямой опасности для вождения или взаимодействия."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f11",
+        "item_index": 0
+      },
+      {
+        "id": "6f7cdc98-6",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Низкая релевантность; статический элемент инфраструктуры окружающей среды."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f12",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "rectangle",
+        "value": {
+          "x": 65,
+          "y": 28.999999999999996,
+          "width": 10,
+          "height": 7.000000000000002,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 0,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "labels",
+        "value": {
+          "x": 65,
+          "y": 28.999999999999996,
+          "width": 10,
+          "height": 7.000000000000002,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Далекий неподвижный транспорт"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Очередь транспортных средств видна далеко впереди по направлению движения эго-автомобиля, кажущаяся неподвижной под пешеходным мостом. Самым крупным видимым транспортным средством среди них является темное транспортное средство, похожее на грузовик или автобус. Они расположены на центральной и крайней левой полосах относительно перспективы эго-автомобиля."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Останется неподвижным, пока красный светофор не изменится на зеленый."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 0
+      },
+      {
+        "id": "1f1ed8ff-8",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Высокая релевантность: Эти транспортные средства блокируют путь эго-автомобиля, указывая на необходимость немедленной остановки."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "rectangle",
+        "value": {
+          "x": 89,
+          "y": 37,
+          "width": 4.00000000000001,
+          "height": 4.999999999999995,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 0,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "labels",
+        "value": {
+          "x": 89,
+          "y": 37,
+          "width": 4.00000000000001,
+          "height": 4.999999999999995,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Синий седан"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Припаркованный синий седан"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f2",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Неподвижный синий автомобиль"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f3",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Синий седан припаркован на дальнем правом обочине, частично скрыт пятнами снега на земле. Он остается неподвижным на протяжении всей последовательности."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Синий седан припаркован на правой обочине, частично на участке травы со снегом. Он полностью неподвижен на протяжении всей последовательности."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f5",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Синий автомобиль припаркован на дальней правой стороне дороги, частично скрыт насыпью и кустами. Он остается неподвижным на протяжении всей последовательности."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f6",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Вероятно, останется припаркованным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Очень вероятно, останется неподвижным. Маловероятно, что снова выедет в движение."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f8",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Маловероятно, что будет двигаться; останется припаркованным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f9",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Низкая релевантность: Расположен далеко от активной проезжей части, не представляет непосредственной угрозы."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Низкая релевантность: припаркован далеко от активной проезжей части, не представляет непосредственной угрозы и не требует действий от эго-автомобиля."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f11",
+        "item_index": 0
+      },
+      {
+        "id": "7700da1a-f",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Низкая релевантность; припаркован за пределами основной проезжей части, не представляя непосредственной угрозы и не требуя действий."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f12",
+        "item_index": 0
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "rectangle",
+        "value": {
+          "x": 89,
+          "y": 40,
+          "width": 6.000000000000003,
+          "height": 7.999999999999997,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 3,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "labels",
+        "value": {
+          "x": 89,
+          "y": 40,
+          "width": 6.000000000000003,
+          "height": 7.999999999999997,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Темный внедорожник"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Припаркованный темный внедорожник"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f2",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Неподвижный темный внедорожник"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f3",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Темный внедорожник припаркован на правом обочине, ближе к положению эго-автомобиля, чем синий седан. Он остается неподвижным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Темный внедорожник припаркован на правой обочине/участке травы, за синим седаном. Он полностью неподвижен на протяжении всей последовательности."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f5",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Темный внедорожник припаркован на правом обочине, за неподвижным зеленым транспортным средством. Он остается неподвижным с момента своего первого четкого появления."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f6",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Вероятно, останется припаркованным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Очень вероятно, останется неподвижным. Маловероятно, что снова выедет в движение."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f8",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Маловероятно, что будет двигаться; останется припаркованным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f9",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Низкая релевантность: Расположен за пределами активной проезжей части, не представляет непосредственной угрозы."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Низкая релевантность: припаркован далеко от активной проезжей части, не представляет непосредственной угрозы и не требует действий от эго-автомобиля."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f11",
+        "item_index": 3
+      },
+      {
+        "id": "f36f0f6e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Низкая релевантность; припаркован за пределами основной проезжей части, не представляя непосредственной угрозы. Следить за признаками движения (например, стоп-сигналы, поворотники) по мере приближения эго."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f12",
+        "item_index": 3
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "rectangle",
+        "value": {
+          "x": 79.00000000000001,
+          "y": 42,
+          "width": 6.999999999999992,
+          "height": 8.000000000000004,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 4,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "labels",
+        "value": {
+          "x": 79.00000000000001,
+          "y": 42,
+          "width": 6.999999999999992,
+          "height": 8.000000000000004,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Большой зеленый и оранжевый автомобиль"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Зелено-оранжевый автобус или фургон"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f2",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Неподвижный зеленый автомобиль"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f3",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Большое транспортное средство, возможно, автобус, с зелеными и оранжевыми акцентами, видно неподвижным на правом обочине, за темным внедорожником."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Большое транспортное средство, возможно, автобус или большой фургон, с характерной зеленой и оранжевой ливреей, припарковано на крайней правой стороне дороги, частично скрыто внедорожником на переднем плане в кадре 4. Оно остается неподвижным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f5",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Большое зеленое транспортное средство, возможно, автобус или трамвай, неподвижно находится на правой стороне дороги, немного впереди текущего положения эго-автомобиля. Оно припарковано за пределами основных полос движения, частично скрыто столбом и деревьями. Оно остается неподвижным с момента своего первого четкого появления."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f6",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Вероятно, останется неподвижным, возможно, на автобусной остановке."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Очень вероятно, останется неподвижным. Маловероятно, что снова выедет в движение."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f8",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Маловероятно, что будет двигаться; останется припаркованным или остановленным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f9",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Низкая релевантность: Расположен за пределами активной проезжей части, не представляет непосредственной угрозы."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Низкая релевантность: припаркован далеко от активной проезжей части, не представляет непосредственной угрозы и не требует действий от эго-автомобиля."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f11",
+        "item_index": 4
+      },
+      {
+        "id": "6afcf67e-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Низкая релевантность; припаркован за пределами основной проезжей части, не представляя непосредственной угрозы. Следить за признаками возвращения в движение по мере приближения эго."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f12",
+        "item_index": 4
+      },
+      {
+        "id": "c983a271-c",
+        "type": "rectangle",
+        "value": {
+          "x": 47.99999999999999,
+          "y": 28.000000000000004,
+          "width": 4.00000000000001,
+          "height": 3.9999999999999987,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 1,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "c983a271-c",
+        "type": "labels",
+        "value": {
+          "x": 47.99999999999999,
+          "y": 28.000000000000004,
+          "width": 4.00000000000001,
+          "height": 3.9999999999999987,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 1
+      },
+      {
+        "id": "c983a271-c",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 1
+      },
+      {
+        "id": "c983a271-c",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Индикатор сигнала"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 1
+      },
+      {
+        "id": "c983a271-c",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 1
+      },
+      {
+        "id": "c983a271-c",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Небольшой цифровой индикатор сигнала или светофор, расположенный под пешеходным переходом, немного правее пути эго-автомобиля. Изначально он отображает красный или оранжевый свет. К кадру 3 он явно меняется на зеленый и остается зеленым до кадра 4."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 1
+      },
+      {
+        "id": "c983a271-c",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 1
+      },
+      {
+        "id": "c983a271-c",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Вероятно, останется зеленым для немедленного приближения, позволяя эго-автомобилю продолжить движение."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 1
+      },
+      {
+        "id": "c983a271-c",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 1
+      },
+      {
+        "id": "c983a271-c",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Высокий приоритет: напрямую контролирует поток транспорта для эго-автомобиля на предстоящем перекрестке, требуя наблюдения и соблюдения."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 1
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "rectangle",
+        "value": {
+          "x": 77,
+          "y": 20,
+          "width": 21.999999999999993,
+          "height": 17,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 0,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "labels",
+        "value": {
+          "x": 77,
+          "y": 20,
+          "width": 21.999999999999993,
+          "height": 17,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 0
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 0
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Большой цифровой билборд"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 0
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 0
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Большой цифровой билборд виден на дальней правой стороне дороги, показывающий рекламу с зелеными и белыми элементами. Его содержимое, кажется, незначительно меняется в разных кадрах, хотя конкретные детали неразборчивы. Это статическая структура."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 0
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 0
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Продолжит отображать различную рекламу."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 0
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 0
+      },
+      {
+        "id": "3c455dbf-e",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Низкая релевантность; статический элемент окружающей среды, который служит потенциальным незначительным визуальным отвлечением."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "rectangle",
+        "value": {
+          "x": 57.99999999999999,
+          "y": 39,
+          "width": 5,
+          "height": 8.999999999999998,
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "bbox",
+        "item_index": 0,
+        "image_rotation": 0,
+        "original_width": 960,
+        "original_height": 540
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "labels",
+        "value": {
+          "x": 57.99999999999999,
+          "y": 39,
+          "width": 5,
+          "height": 8.999999999999998,
+          "labels": [
+            "На разметку"
+          ],
+          "rotation": 0
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "label",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_1",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Малый цифровой билборд"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f1",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_2",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Меньший цифровой билборд виден дальше по дороге справа. Изначально он показывает яркое красновато-розовое свечение, которое в последующих кадрах сменяется более разнообразным содержимым. Его положение может на мгновение сделать его неоднозначным как дальний светофор, но это явно динамический рекламный дисплей. Он остается неподвижным."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f4",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_3",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Продолжит отображать динамический контент."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f7",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_4",
+        "item_index": 0
+      },
+      {
+        "id": "b72d5327-a",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Средняя релевантность; его красное свечение может быть на короткое время ошибочно принято за светофор, требуя от водителя подтвердить, что это не устройство регулирования движения."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f10",
+        "item_index": 0
+      },
+      {
+        "id": "5d4b5c84-5",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_5"
+      },
+      {
+        "id": "5d4b5c84-5",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Замедлиться и подготовиться к остановке"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f13"
+      },
+      {
+        "id": "5d4b5c84-5",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Продолжать движение прямо с осторожной скоростью"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f14"
+      },
+      {
+        "id": "5d4b5c84-5",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Двигаться прямо осторожно на умеренной скорости"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f15"
+      },
+      {
+        "id": "5bd78c7d-d",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_6"
+      },
+      {
+        "id": "5bd78c7d-d",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Эго-автомобиль приближается к красному светофору, и впереди уже стоит очередь неподвижных транспортных средств, что указывает на необходимость замедлиться и безопасно подготовиться к остановке. Мокрое дорожное покрытие также требует осторожного подхода."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f16"
+      },
+      {
+        "id": "5bd78c7d-d",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Индикатор сигнала изменился на зеленый, давая разрешение на движение. Дорожная разметка в полосе эго-автомобиля указывает на то, что разрешено ехать прямо. В непосредственной близости нет других движущихся транспортных средств или пешеходов, представляющих опасность. Однако мокрое дорожное покрытие требует поддержания осторожной скорости для обеспечения оптимального сцепления и тормозного пути."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f17"
+      },
+      {
+        "id": "5bd78c7d-d",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Дорога впереди свободна от активного движения в полосах эго-автомобиля, и видимая дорожная разметка в последующих кадрах подтверждает прямолинейное движение. Активных светофоров, контролирующих направление движения эго, нет (красный свет, наблюдаемый, исходит от билборда). Дорожное покрытие мокрое, что требует осторожности и сниженной скорости для поддержания контроля. Хотя несколько транспортных средств припаркованы на правом обочине, они не показывают признаков движения и не находятся на прямом пути движения."
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f18"
+      },
+      {
+        "id": "19a05dd5-8",
+        "type": "choices",
+        "value": {
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "text_category_switcher_7"
+      },
+      {
+        "id": "19a05dd5-8",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "A: Среда вождения - городская многополосная дорога под пасмурным небом. Поверхность дороги мокрая, на обочинах остались следы снега, что указывает на конец зимы или начало весны. Надголовные дорожные знаки и пешеходный мост являются заметными особенностями, а справа находится большой билборд. Плотность движения низкая, лишь несколько дальних транспортных средств остановились на красный свет.::Плотность движения: низкая; Тип дороги: городская артерия; Направление движения: прямое; Полосы: многополосная (не менее двух в направлении эго, общая полоса для прямого/левого поворота для эго); Дорожная разметка: присутствует (пунктирные белые линии, стрелки прямого/левого поворота); Тип дорожного покрытия: асфальт; Сезон: конец зимы/начало весны; Время суток: дневное; Тип освещения: пасмурный/рассеянный естественный свет; Состояние дорожного покрытия: мокрое; Тип осадков: нет; Интенсивность осадков: нет; Видимость: хорошая"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f19"
+      },
+      {
+        "id": "19a05dd5-8",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "B: Сцена изображает движение по многополосной городской дороге под пасмурным небом. Дорожное покрытие мокрое, что указывает на недавние осадки или влажную среду, с некоторыми пятнами снега/слякоти, видимыми на незаасфальтированной правой обочине. Плотность движения очень низкая, других движущихся транспортных средств в непосредственной близости от эго-автомобиля не видно. Надголовные знаки указывают направление для предстоящего перекрестка, и пешеходный путепровод охватывает дорогу. Общая обстановка кажется городской с некоторыми зданиями вдалеке и голыми деревьями.::Плотность движения: очень низкая; Тип дороги: городское шоссе/многополосная дорога; Направление движения: прямое; Полосы: многополосная (2 в направлении эго); Дорожная разметка: присутствует (сплошная белая линия, пунктирная белая линия, прямые стрелки, стрелки прямого/правого поворота); Тип дорожного покрытия: асфальт; Сезон: конец зимы/начало весны; Время суток: дневное; Тип освещения: пасмурный/естественный свет; Состояние дорожного покрытия: мокрое; Тип осадков: нет; Интенсивность осадков: нет; Видимость: хорошая"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f20"
+      },
+      {
+        "id": "19a05dd5-8",
+        "type": "textarea",
+        "value": {
+          "text": [
+            "C: Среда вождения - городская улица с несколькими полосами движения. Небо пасмурное, дорожное покрытие мокрое, что указывает на недавние осадки или влажные условия. На травянистых участках и обочинах видны пятна снега, что указывает на более холодное время года, вероятно, конец зимы или начало весны. Надземный пешеходный мост охватывает дорогу, и заметные дорожные знаки предоставляют навигационную информацию. Плотность движения очень низкая, других движущихся транспортных средств в непосредственной близости от эго-автомобиля не видно. Общая видимость хорошая, несмотря на пасмурные условия.::Плотность движения: очень низкая; Тип дороги: городская улица; Направление движения: прямое; Полосы: многополосная (не менее 2 в направлении эго); Дорожная разметка: присутствует (белые пунктирные, сплошные линии и прямые стрелки); Тип дорожного покрытия: асфальт; Сезон: конец зимы/начало весны; Время суток: дневное; Тип освещения: естественный свет (пасмурный); Состояние дорожного покрытия: мокрое; Тип осадков: нет; Интенсивность осадков: нет; Видимость: хорошая"
+          ]
+        },
+        "origin": "manual",
+        "to_name": "image",
+        "from_name": "f21"
+      }
+    ]
+  }
+};
+
+    const lsfConfig = {
+      description: "Description",
+      config: `<View>
+    <Style>
+        .lsf-main-content.lsf-requesting .lsf-htx-richtext {
+            opacity: 0.4;
+            pointer-events: none;
         }
 
-        const annotationHistory = [
-          //{"id":14,"created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","action_type": "accepted","result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
-          //{"id":15,"created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","action_type": "updated","result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
-          //{"id":16,"created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","action_type": "rejected","result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
-          {"id":16,"comment": "I think according to new design we should record not only update of result in annotation but review rejection/acceptance too, because in current way we can't show action range in the history, only result updating.\n\nIn current functionality we create history record if we pass a result field. It doesn't let make a comment on review. Because we decided to relate comments to history.", "created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","action_type": "fixed_and_accepted","result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
-          //{"id":17,"created_by":1,"action_type": "draft-created","created_at":"2021-05-26T13:03:43.335198Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":34,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}]},
-          //{"id":18,"created_by":1,"action_type": "updated","created_at":"2021-05-26T13:03:43.335198Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":34,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}]},
-          //{"id":19,"created_by":1,"action_type": "submitted", "created_at":"2021-05-26T13:03:49.330745Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":35,"previous_annotation_history":34,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"},{"id":"ALbgPwBdmj","type":"labels","value":{"end":2215,"text":"ale8) December 31, 2017Tr","start":2190,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},
-          {"id":19,"created_by":1,"action_type": "submitted", "created_at":"2021-05-26T13:03:49.330745Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":35,"previous_annotation_history":34,"result":[{ "original_width": 2242, "original_height": 2802, "image_rotation": 0, "value": { "x": 22.038567493112954, "y": 44.27312775330397, "width": 30.57851239669421, "height": 24.008810572687224, "rotation": 0 }, "id": "EPcQbFzM5K", "from_name": "bbox", "to_name": "image", "type": "rectangle", "origin": "manual" }, { "original_width": 2242, "original_height": 2802, "image_rotation": 0, "value": { "x": 22.038567493112954, "y": 44.27312775330397, "width": 30.57851239669421, "height": 24.008810572687224, "rotation": 0, "labels": ["Handwriting"]}, "id": "EPcQbFzM5K", "from_name": "label", "to_name": "image", "type": "labels", "origin": "manual"},{"original_width": 2242, "original_height": 2802, "image_rotation": 0, "value": { "x": 22.038567493112954, "y": 44.27312775330397, "width": 30.57851239669421, "height": 24.008810572687224, "rotation": 0, "text": ["hello world"]}, "id": "EPcQbFzM5K", "from_name": "transcription", "to_name": "image", "type": "textarea", "origin": "manual"}]},
-        ]
+        textarea {
+            font-size: 16px !important;
+        }
 
-        const lsfConfig = {
-          description: "Description",
-          config: `
-          <View>
-            <Style>
-                .full-layout {
-                    display: flex;
-                    height: 50vh;
-                }
+        .lsf-panel__header {
+            font-size: 16px !important;
+        }
+    </Style>
+    <Header value="Разметка дорожной ситуации" />
 
-                .scrollable-box {
-                    flex: 1;
-                    overflow-y: auto;
-                    padding: 10px;
-                    border-left: 1px solid #ccc;
-                }
+    <!-- Instructions -->
+    <Text name="instruction" value="Разметьте дорожную ситуацию, следуя инструкции" />
 
-                .cls-name {
-                    position: sticky;
-                    top: 0;
-                    margin: 0;
-                    z-index: 1000;
-                    background-color: white;
-                }
-
-                .fancy-choices {
-                    outline: 1px dotted black;
-                    padding: 35px;
-                }
-            </Style>
-
-            <View className="cls-name">
-                <Video name="video" value="$video_url" framerate="2" height="500" timelineHeight="25" />
-                <VideoRectangle name="box_camera" toName="video"/>
+    <!-- Collapsible Video View -->
+    <Collapse>
+        <Panel value="Показать слайдшоу">
+            <View>
+                <Video name="keyframe_video" value="$keyframe_video_url" frameRate="$frame_rate" muted="true" />
             </View>
+        </Panel>
+    </Collapse>
 
-            <Text name="p1"
-                value="Обведите с помощью bounding box каждого участника движения,  с которым взаимодействует ВАТС, и выберите его тип (когда он ВПЕРВЫЕ встречается на изображении любой из камер)" />
-                <Labels name="videoLabels" toName="video" allowEmpty="false">
-                  <Label value="Уязвимый участник" background="blue"/>
-                  <Label value="Транспортное средство" background="red"/>
-                </Labels>
+    <!-- External Links -->
+    <HyperText name="external_links"
+        value="&lt;a href=&quot;$full_video_url&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Полное видео&lt;/a&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;a href=&quot;$image_url&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Фотоколлаж&lt;/a&gt;" />
+
+    <View style="display:flex;align-items:start;gap:8px;flex-direction:column">
+
+        <Image name="image" valueList="$images" maxWidth="960px" zoom="true" width="80%" horizontalAlignment="center"
+            verticalAlignment="center" />
+        <View>
+
+
         </View>
-          `,
-          interfaces: [
-              "side-column"
-              // "panel",
-              // "update",
-              // "submit",
-              // "skip",
-              // "controls",
-              // //"review",
-              // "infobar",
-              // "topbar",
-              // "instruction",
-              // "side-column",
-              // "ground-truth",
-              // "annotations:tabs",
-              // "annotations:menu",
-              // "annotations:current",
-              // "annotations:add-new",
-              // "annotations:delete",
-              // 'annotations:view-all',
-              // "predictions:tabs",
-              // "predictions:menu",
-              // "auto-annotation",
-              // "edit-history",
-              // "topbar:prevnext",
-          ],
-          task: {
-            annotations: [],
-            predictions: [],
-            id: 1,
-            data: {
-              "video_url": "https://labelstudio.cs.navio.auto/static/samples/opossum_snow.mp4"
-            }
-          },
-          onLabelStudioLoad: function (LS) {
-            var c = LS.annotationStore.addAnnotation({
-              userGenerate: true
-            });
-            LS.annotationStore.selectAnnotation(c.id);
-          }
-        };
+    </View>
 
-        var ls = new LabelStudio("label-studio", lsfConfig);
-        console.log('ls', ls)
-        // ls.on("storageInitialized", (store) => {
-        //   ls.on("selectAnnotation", (next) => {
-        //     if (next.type === 'annotation') {
-        //       store.setHistory(annotationHistory)
-        //     }
-        //   })
-        //   ls.on("updateAnnotation", (_, annotation) => {
-        //     console.log(annotation.serializeAnnotation());
-        //   })
-        //   ls.on("regionFinishedDrawing", (region, list) => {
-        //     console.log("finish drawing", {region, list})
-        //   })
-        // })
-      });</script></body></html>
+    <Labels name="label" toName="image">
+        <Label value="На разметку" background="#f5b2b2"/>
+        <Label value="Готово" background="green"/>
+        <Label value="Аномалия, исключить" background="grey"/>
+        <Label value="Готово, ббокс не применим" background="blue"/>
+        <Label value="Готово, вручную" background="violet"/>
+        <Label value="Ошибка (валидация)" background="#ff0d00"/>
+    </Labels>
+
+
+
+    <Collapse>
+        <Panel value="Разметка объектов">
+            <View>
+
+                <Rectangle name="bbox" toName="image" strokeWidth="3" />
+
+                <Choices name="object_type_switcher" toName="image" showInLine="true" required="true" perRegion="true">
+                    <Choice value="ТС" hotkey="1" />
+                    <Choice value="Пешеход" hotkey="2" />
+                    <Choice value="Знак" hotkey="3" />
+                    <Choice value="Светофор" hotkey="4" />
+                    <Choice value="Дорожная разметка" hotkey="5" />
+                    <Choice value="Другое" hotkey="6" />
+                </Choices>
+
+
+                <Choices name="affect_switcher" toName="image" showInLine="true" required="true" perRegion="true">
+                    <Choice value="Не влияет на эго напрямую (1-ый тип)" hotkey="6" />
+                    <Choice value="Влияет (2-ой тип)" hotkey="7" />
+                </Choices>
+
+                <View visibleWhen="choice-selected" whenTagName="object_type_switcher" whenChoiceValue="Знак">
+                    <Choices name="restriction_non_apply_reason" toName="image" showInLine="true" perRegion="true">
+                        <Choice value="Не применим к легковому ТС" hotkey="r" />
+                        <Choice value="Действует на другую полосу/другая причина" hotkey="t" />
+                        <Choice value="Не действует из-за работающего светофора" hotkey="y" />
+                    </Choices>
+                </View>
+
+
+                <!-- ========================================================================================= -->
+                <text name='name' value="Наименование" />
+                <Choices name="text_category_switcher_1" toName="image" choice="multiple" showInLine="true"
+                    required="true" perRegion="true">
+                    <Choice value="A" hotkey="q" selected="true" />
+                    <Choice value="B" hotkey="w" selected="false" />
+                    <Choice value="C" hotkey="e" selected="false" />
+                </Choices>
+
+                <!-- View for Category A -->
+                <View visibleWhen="choice-selected" whenTagName="text_category_switcher_1" whenChoiceValue="A">
+                    <TextArea name="f1" toName="image" editable="true" perRegion="true" rows="5" placeholder="1А" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                </View>
+
+                <!-- View for Category B -->
+                <View visibleWhen="choice-selected" whenTagName="text_category_switcher_1" whenChoiceValue="B">
+                    <TextArea name="f2" toName="image" editable="true" perRegion="true" rows="5" placeholder="1B" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                </View>
+
+                <!-- View for Category C -->
+                <View visibleWhen="choice-selected" whenTagName="text_category_switcher_1" whenChoiceValue="C">
+                    <TextArea name="f3" toName="image" editable="true" perRegion="true" rows="5" placeholder="1C" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                </View>
+
+
+                <!-- ========================================================================================= -->
+                <Collapse>
+                    <Panel value="Описание">
+
+                        <Choices name="text_category_switcher_2" toName="image" choice="multiple" showInLine="true"
+                            required="true" perRegion="true"
+                            requiredMessage="Размекта объектов:описание не может быть пустой">
+                            <Choice value="A" hotkey="a" />
+                            <Choice value="B" hotkey="s" />
+                            <Choice value="C" hotkey="d" />
+                        </Choices>
+
+                        <!-- View for Category A -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_2" whenChoiceValue="A">
+                            <TextArea name="f4" toName="image" editable="true" perRegion="true" rows="5" placeholder="2А" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                        <!-- View for Category B -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_2" whenChoiceValue="B">
+                            <TextArea name="f5" toName="image" editable="true" perRegion="true" rows="5" placeholder="2B" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                        <!-- View for Category C -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_2" whenChoiceValue="C">
+                            <TextArea name="f6" toName="image" editable="true" perRegion="true" rows="5" placeholder="2C" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                    </Panel>
+                </Collapse>
+
+                <Collapse>
+                    <Panel value="Прогноз">
+
+                        <!-- ========================================================================================= -->
+                        <Choices name="text_category_switcher_3" toName="image" choice="multiple" showInLine="true"
+                            required="true" perRegion="true"
+                            requiredMessage="Размекта объектов:прогноз не может быть пустой">
+                            <Choice value="A" hotkey="z" />
+                            <Choice value="B" hotkey="x" />
+                            <Choice value="C" hotkey="c" />
+                        </Choices>
+
+                        <!-- View for Category A -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_3" whenChoiceValue="A">
+                            <TextArea name="f7" toName="image" editable="true" perRegion="true" rows="5" placeholder="3А" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                        <!-- View for Category B -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_3" whenChoiceValue="B">
+                            <TextArea name="f8" toName="image" editable="true" perRegion="true" rows="5" placeholder="3B" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                        <!-- View for Category C -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_3" whenChoiceValue="C">
+                            <TextArea name="f9" toName="image" editable="true" perRegion="true" rows="5" placeholder="3C" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                    </Panel>
+                </Collapse>
+
+                <Collapse>
+                    <Panel value="Релевантность">
+
+                        <!-- ========================================================================================= -->
+                        <Choices name="text_category_switcher_4" toName="image" choice="multiple" showInLine="true"
+                            required="true" perRegion="true"
+                            requiredMessage="Размекта объектов:релеватность не может быть пустой">
+                            <Choice value="A" hotkey="i" />
+                            <Choice value="B" hotkey="o" />
+                            <Choice value="C" hotkey="p" />
+                        </Choices>
+
+                        <!-- View for Category A -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_4" whenChoiceValue="A">
+                            <TextArea name="f10" toName="image" editable="true" perRegion="true" rows="5" placeholder="4А" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                        <!-- View for Category B -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_4" whenChoiceValue="B">
+                            <TextArea name="f11" toName="image" editable="true" perRegion="true" rows="5" placeholder="4B" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                        <!-- View for Category C -->
+                        <View visibleWhen="choice-selected" whenTagName="text_category_switcher_4" whenChoiceValue="C">
+                            <TextArea name="f12" toName="image" editable="true" perRegion="true" rows="5" placeholder="4C" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                        </View>
+
+                    </Panel>
+                </Collapse>
+
+            </View>
+        </Panel>
+    </Collapse>
+
+    <Collapse>
+        <Panel value="Разметка эго">
+            <View>
+
+                <Collapse>
+                    <Panel value="Текущее действие">
+                        <View>
+
+                            <!-- ========================================================================================= -->
+                            <Choices name="text_category_switcher_5" toName="image" choice="multiple" showInLine="true"
+                                required="true" requiredMessage="Размекта ЭГО:текущее действие не может быть пустой">
+                                <Choice value="A" hotkey="j" />
+                                <Choice value="B" hotkey="k" />
+                                <Choice value="C" hotkey="l" />
+                            </Choices>
+
+                            <!-- View for Category A -->
+                            <View visibleWhen="choice-selected" whenTagName="text_category_switcher_5"
+                                whenChoiceValue="A">
+                                <TextArea name="f13" toName="image" editable="true" rows="5" placeholder="1А" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                            </View>
+
+                            <!-- View for Category B -->
+                            <View visibleWhen="choice-selected" whenTagName="text_category_switcher_5"
+                                whenChoiceValue="B">
+                                <TextArea name="f14" toName="image" editable="true" rows="5" placeholder="1B" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                            </View>
+
+                            <!-- View for Category C -->
+                            <View visibleWhen="choice-selected" whenTagName="text_category_switcher_5"
+                                whenChoiceValue="C">
+                                <TextArea name="f15" toName="image" editable="true" rows="5" placeholder="1C" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                            </View>
+
+                        </View>
+                    </Panel>
+                </Collapse>
+
+                <Collapse>
+                    <Panel value="Обоснование:">
+                        <View>
+
+
+                            <!-- ========================================================================================= -->
+                            <Choices name="text_category_switcher_6" toName="image" choice="multiple" showInLine="true"
+                                required="true" requiredMessage="Размекта ЭГО:обоснование не может быть пустой">
+                                <Choice value="A" hotkey="b" />
+                                <Choice value="B" hotkey="n" />
+                                <Choice value="C" hotkey="m" />
+                            </Choices>
+
+                            <!-- View for Category A -->
+                            <View visibleWhen="choice-selected" whenTagName="text_category_switcher_6"
+                                whenChoiceValue="A">
+                                <TextArea name="f16" toName="image" editable="true" rows="5" placeholder="2А" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                            </View>
+
+                            <!-- View for Category B -->
+                            <View visibleWhen="choice-selected" whenTagName="text_category_switcher_6"
+                                whenChoiceValue="B">
+                                <TextArea name="f17" toName="image" editable="true" rows="5" placeholder="2B" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                            </View>
+
+                            <!-- View for Category C -->
+                            <View visibleWhen="choice-selected" whenTagName="text_category_switcher_6"
+                                whenChoiceValue="C">
+                                <TextArea name="f18" toName="image" editable="true" rows="5" placeholder="2C" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                            </View>
+
+                        </View>
+                    </Panel>
+                </Collapse>
+
+            </View>
+        </Panel>
+    </Collapse>
+
+    <Collapse>
+        <Panel value="Разметка ОДД">
+            <View>
+
+
+                <!-- ========================================================================================= -->
+                <Choices name="text_category_switcher_7" toName="image" choice="multiple" showInLine="true"
+                    required="true" requiredMessage="Размекта ОДД не может быть пустой">
+                    <Choice value="A" />
+                    <Choice value="B" />
+                    <Choice value="C" />
+                </Choices>
+
+                <!-- View for Category A -->
+                <View visibleWhen="choice-selected" whenTagName="text_category_switcher_7" whenChoiceValue="A">
+                    <TextArea name="f19" toName="image" editable="true" rows="5" placeholder="1А" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                </View>
+
+                <!-- View for Category B -->
+                <View visibleWhen="choice-selected" whenTagName="text_category_switcher_7" whenChoiceValue="B">
+                    <TextArea name="f20" toName="image" editable="true" rows="5" placeholder="1B" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                </View>
+
+                <!-- View for Category C -->
+                <View visibleWhen="choice-selected" whenTagName="text_category_switcher_7" whenChoiceValue="C">
+                    <TextArea name="f21" toName="image" editable="true" rows="5" placeholder="1C" displayMode="tag" maxSubmissions="1" showSubmitButton="false"/>
+                </View>
+
+            </View>
+        </Panel>
+    </Collapse>
+
+    <!-- Валидация -->
+    <Choices name="broken_seq" toName="image">
+        <Choice value="Бракованная последовательность" />
+    </Choices>
+
+
+
+</View>`,
+      interfaces: [
+          "side-column"
+      ],
+      task: {
+        annotations: [data.predictions],
+        predictions: [],
+        id: 1,
+        data: data
+      },
+      onLabelStudioLoad: function (LS) {
+        var c = LS.annotationStore.addAnnotation({
+          userGenerate: true
+        });
+        LS.annotationStore.selectAnnotation(c.id);
+      }
+    };
+
+    var ls = new LabelStudio("label-studio", lsfConfig);
+    console.log('ls', ls)
+    // ls.on("storageInitialized", (store) => {
+    //   ls.on("selectAnnotation", (next) => {
+    //     if (next.type === 'annotation') {
+    //       store.setHistory(annotationHistory)
+    //     }
+    //   })
+    //   ls.on("updateAnnotation", (_, annotation) => {
+    //     console.log(annotation.serializeAnnotation());
+    //   })
+    //   ls.on("regionFinishedDrawing", (region, list) => {
+    //     console.log("finish drawing", {region, list})
+    //   })
+    // })
+  });</script></body></html>
