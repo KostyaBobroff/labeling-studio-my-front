@@ -111,7 +111,7 @@ jobs:
           yarn run test:parallel
 
       - name: "Upload suite output" 
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v5
         if: ${{ failure() }}
         with:
           name: failure-result
@@ -125,7 +125,7 @@ jobs:
           yarn cvg:report
 
       - name: Upload coverage to Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v5
         if: ${{ success() }}
         with:
           name: cypress-tests-coverage
