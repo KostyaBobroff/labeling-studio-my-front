@@ -2841,8 +2841,9 @@
   integrity sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==
 
 "@types/lodash.ismatch@^4.4.6":
-  version "4.4.6"
-  resolved "https://registry.yarnpkg.com/@types/lodash.ismatch/-/lodash.ismatch-4.4.6.tgz#7ef39e51e56e562e579b1416c4edbb57295b239c"
+  version "4.4.9"
+  resolved "https://registry.yarnpkg.com/@types/lodash.ismatch/-/lodash.ismatch-4.4.9.tgz#97b4317f7dc3975bb51660a0f9a055ac7b67b134"
+  integrity sha512-qWihnStOPKH8urljLGm6ZOEdN/5Bt4vxKR81tL3L4ArUNLvcf9RW3QSnPs21eix5BiqioSWq4aAXD4Iep+d0fw==
   dependencies:
     "@types/lodash" "*"
 
